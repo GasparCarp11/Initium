@@ -5,14 +5,18 @@ import 'package:initium/User/repository/auth_repository.dart';
 import 'package:initium/User/repository/firebase_auth_api.dart';
 
 class UserBloc implements Bloc {
-  final _auth_repository = AuthRepository();
+  final auth_repository = AuthRepository();
 
   Stream<User> streamFirebase = FirebaseAuth.instance.authStateChanges();
 
   Stream<User> get authStatus => streamFirebase;
 
-  Future<FirebaseUser> signIn() {
-    return _auth_repository.signInFirebase();
+  Future<UserCredential> signIn() {
+    return auth_repository.signInFirebase();
+  }
+
+  signOut() {
+    return auth_repository.signOut();
   }
 
   @override

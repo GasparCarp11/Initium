@@ -19,21 +19,20 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    UserBloc userBloc = BlocProvider.of<UserBloc>(context);
+    userBloc = BlocProvider.of(context);
     return _handleCurrentSession();
   }
 
   Widget _handleCurrentSession() {
     return StreamBuilder(
-      stream: userBloc.authStatus,
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (!snapshot.hasData || snapshot.hasError) {
-          return signInGoogleUI();
-        } else {
-          return HomeScreen();
-        }
-      },
-    );
+        stream: userBloc.authStatus,
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasError || snapshot.data == null) {
+            return signInGoogleUI();
+          } else {
+            return HomeScreen();
+          }
+        });
   }
 
   Widget signInGoogleUI() {
@@ -58,8 +57,8 @@ class _SignInScreenState extends State<SignInScreen> {
               Button(
                 text: "Inicia con Google",
                 onPressed: () {
-                  userBloc.signIn().then((FirebaseUser user) =>
-                      print("El usuario es ${user.displayName}"));
+                  userBloc.signIn().then((UserCredential user) =>
+                      print("El usuario es ${user.user.displayName}"));
                 },
                 heigth: 50.0,
                 width: 300.0,
