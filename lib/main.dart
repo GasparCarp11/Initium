@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:initium/User/bloc/bloc_user.dart';
 import 'package:initium/User/ui/screens/sign_in_screen.dart';
+import 'package:initium/routes/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,7 +12,6 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -22,8 +22,8 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        // home: MyHomePage(title: 'Flutter Demo Home Page'),
-        home: SignInScreen(),
+        initialRoute: "/",
+        routes: getNamedRoutes(),
       ),
       bloc: UserBloc(),
     );
@@ -31,7 +31,6 @@ class MyApp extends StatelessWidget {
 }
 
 class Loading extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -43,7 +42,6 @@ class Loading extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        // home: MyHomePage(title: 'Flutter Demo Home Page'),
         home: Scaffold(
           body: Text("Cargando con FireBase"),
         ),
@@ -53,7 +51,6 @@ class Loading extends StatelessWidget {
 }
 
 class Error extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -65,7 +62,6 @@ class Error extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        // home: MyHomePage(title: 'Flutter Demo Home Page'),
         home: Scaffold(
           body: Text("Error al conectar con FireBase"),
         ),
@@ -75,24 +71,19 @@ class Error extends StatelessWidget {
 }
 
 class App extends StatelessWidget {
-  // Create the initilization Future outside of `build`:
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      // Initialize FlutterFire:
       future: _initialization,
       builder: (context, snapshot) {
-        // Check for errors
         if (snapshot.hasError) {
           return Error();
         }
-        // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
           return MyApp();
         }
-        // Otherwise, show something whilst waiting for initialization to complete
         return Loading();
       },
     );
