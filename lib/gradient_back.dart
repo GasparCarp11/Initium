@@ -20,7 +20,7 @@ class GradientBack extends StatelessWidget {
       decoration: BoxDecoration(
           gradient: LinearGradientStyle.linearGradient(
         orientation: LinearGradientStyle.ORIENTATION_HORIZONTAL,
-        gradientType: LinearGradientStyle.GRADIENT_TYPE_MIDNIGHT_CITY,
+        gradientType: LinearGradientStyle.GRADIENT_TYPE_DARK_OCEAN,
       )),
     );
   }

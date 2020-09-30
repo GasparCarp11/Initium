@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 
-class GoogleButton extends StatefulWidget {
+class Button extends StatefulWidget {
   final VoidCallback onPressed;
   final String text;
+  final String photoURL;
   double width = 0.0;
   double heigth = 0.0;
 
-  GoogleButton(
+  Button(
       {Key key,
+      @required this.photoURL,
       @required this.text,
       @required this.onPressed,
       this.heigth,
       this.width});
 
   @override
-  _GoogleButtonState createState() => _GoogleButtonState();
+  _ButtonState createState() => _ButtonState();
 }
 
-class _GoogleButtonState extends State<GoogleButton> {
+class _ButtonState extends State<Button> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -29,7 +31,7 @@ class _GoogleButtonState extends State<GoogleButton> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),
               gradient: LinearGradient(
-                  colors: [Colors.yellow[600], Colors.amberAccent[700]],
+                  colors: [Colors.blue[900], Colors.blue[400]],
                   begin: FractionalOffset(0.2, 0.0),
                   end: FractionalOffset(1.0, 0.6),
                   stops: [0.0, 0.6],
@@ -40,7 +42,7 @@ class _GoogleButtonState extends State<GoogleButton> {
               Image(
                   height: 30.0,
                   width: 40.0,
-                  image: AssetImage("assets/google.png")),
+                  image: AssetImage(widget.photoURL)),
               Container(
                 margin: EdgeInsets.only(left: 10.0),
                 child: Text(
@@ -48,7 +50,7 @@ class _GoogleButtonState extends State<GoogleButton> {
                   style: TextStyle(
                       fontSize: 18.0,
                       fontFamily: "Montserrat",
-                      color: Colors.black,
+                      color: Colors.white,
                       fontWeight: FontWeight.w500),
                 ),
               ),

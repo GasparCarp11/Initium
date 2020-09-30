@@ -5,6 +5,7 @@ import 'package:initium/User/model/usuario.dart';
 class CloudFirestoreAPI {
   final String USERS = "users";
   final String ORDERS = "orders";
+  final String SHOPS = "shops";
 
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 

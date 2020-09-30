@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:initium/User/model/usuario.dart';
@@ -20,6 +21,20 @@ class UserBloc implements Bloc {
   }
 
   final _cloudFirestoreRepository = CloudFirestoreRepository();
+
+  final CollectionReference collectionReference =
+      FirebaseFirestore.instance.collection("shops");
+
+  Stream<QuerySnapshot> get listshops => collectionReference.snapshots();
+
+  Stream<QuerySnapshot> showProducts(String shopUID) {
+    CollectionReference collectionReference = FirebaseFirestore.instance
+        .collection("shops")
+        .doc(shopUID)
+        .collection("products");
+    return collectionReference.snapshots();
+  }
+
   void updateUserData(Usuario usuario) =>
       _cloudFirestoreRepository.updateUserDataFirestore(usuario);
 

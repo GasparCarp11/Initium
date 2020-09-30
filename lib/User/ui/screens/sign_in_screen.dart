@@ -3,12 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:initium/User/bloc/bloc_user.dart';
 import 'package:initium/User/model/usuario.dart';
-import 'package:initium/User/ui/screens/home_screen.dart';
-import 'package:initium/User/ui/screens/user_account_screen.dart';
-import 'package:initium/User/ui/widgets/profile_header.dart';
-import 'package:initium/button.dart';
-
-import '../../../gradient_back.dart';
+import 'package:initium/User/ui/widgets/button.dart';
+import 'package:initium/gradient_back.dart';
+import 'account_user_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -23,7 +20,6 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    screenwidth = MediaQuery.of(context).size.width;
     userBloc = BlocProvider.of(context);
     return _handleCurrentSession();
   }
@@ -32,10 +28,12 @@ class _SignInScreenState extends State<SignInScreen> {
     return StreamBuilder(
         stream: userBloc.authStatus,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
+          print(snapshot.data);
+          print(snapshot.connectionState);
           if (snapshot.hasError || snapshot.data == null) {
             return signInGoogleUI();
           } else {
-            return UserAccountScreen();
+            return AccountUserScreen();
           }
         });
   }
@@ -45,7 +43,7 @@ class _SignInScreenState extends State<SignInScreen> {
       body: Stack(
         alignment: Alignment.center,
         children: <Widget>[
-          GradientBack(height: null),
+          GradientBack(),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -53,21 +51,31 @@ class _SignInScreenState extends State<SignInScreen> {
                 child: Container(
                   width: screenwidth,
                   child: Container(
-                    margin: EdgeInsets.only(left: 15.0),
-                    child: Text(
-                      "Bienvenido.\nA tu aplicacion de pedidos",
-                      style: TextStyle(
-                        fontSize: 28.0,
-                        fontFamily: "Montserrat",
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.start,
+                    margin: EdgeInsets.only(left: 30.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Bienvenido\nA Initium.",
+                          style: TextStyle(
+                            fontSize: 28.0,
+                            fontFamily: "Montserrat",
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.justify,
+                        ),
+                        Image(
+                          image: AssetImage('assets/initium.png'),
+                          height: 80,
+                          width: 150,
+                        )
+                      ],
                     ),
                   ),
                 ),
               ),
-              GoogleButton(
+              Button(
+                photoURL: "assets/google.png",
                 text: "Inicia con Google",
                 onPressed: () {
                   userBloc.signOut();
