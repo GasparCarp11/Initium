@@ -16,7 +16,6 @@ class CloudFirestoreAPI {
       "name": user.name,
       "email": user.email,
       "photoURL": user.photoURL,
-      "myOrders": user.myOrders,
       "ubication": user.ubication,
       "lastSignIn": DateTime.now(),
     }, SetOptions(merge: true));

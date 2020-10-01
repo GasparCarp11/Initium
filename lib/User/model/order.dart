@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:initium/User/model/usuario.dart';
 
 class Order {
-  Usuario buyer;
-  String shop;
-  String id;
-  List products;
-  int price;
+  final String uid;
+  final String shop;
+  final String buyer;
+  final List products;
+  final int ammount;
 
   Order({
     Key key,
     @required this.shop,
+    @required this.uid,
     @required this.buyer,
     @required this.products,
-    @required this.price,
-    this.id,
+    @required this.ammount,
   });
 }

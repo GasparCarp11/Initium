@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:initium/User/ui/widgets/tools.widgets/navigation_bar.dart';
 
 class MyOrdersScreen extends StatefulWidget {
   MyOrdersScreen({Key key}) : super(key: key);
@@ -11,9 +12,11 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Mis pedidos"),
+      backgroundColor: Colors.blueGrey[900],
+      bottomNavigationBar: NavigationBar(
+        products: false,
       ),
+      body: Center(),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'profile_header.dart';
 
-class ProfileTrips extends StatelessWidget {
+class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(

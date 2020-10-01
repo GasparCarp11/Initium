@@ -1,54 +1,41 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:generic_bloc_provider/generic_bloc_provider.dart';
-import 'package:initium/User/bloc/bloc_user.dart';
-import 'package:linear_gradient/linear_gradient.dart';
 
 class ListShops extends StatelessWidget {
   final Map data;
 
-  ListShops({Key key, @required this.data});
+  ListShops({
+    Key key,
+    @required this.data,
+  });
 
   @override
   Widget build(BuildContext context) {
-    String address;
-
-    if (data['address'] != null) {
-      address = data['address'];
-    } else {
-      address = "";
-    }
-
     if (data['available'] == true) {
       return Container(
         margin: EdgeInsets.all(10.0),
         padding: EdgeInsets.only(left: 8.0),
-        width: MediaQuery.of(context).size.width,
-        height: 130,
+        width: MediaQuery.of(context).size.width - 20,
+        height: 100,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0),
-            gradient: LinearGradientStyle.linearGradient(
-              orientation: LinearGradientStyle.ORIENTATION_HORIZONTAL,
-              gradientType: LinearGradientStyle.GRADIENT_TYPE_MIDNIGHT_CITY,
-            ),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                  color: Colors.black38,
-                  blurRadius: 10.0,
-                  spreadRadius: 3.0,
-                  offset: Offset(2.0, 10.0))
-            ]),
+          border: Border.all(
+            color: Colors.blueGrey[600],
+            width: 5,
+          ),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          color: Colors.grey[900],
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(15.0),
               child: FadeInImage(
+                fadeInCurve: Curves.bounceIn,
                 placeholder: AssetImage('assets/loading.gif'),
                 fadeInDuration: Duration(milliseconds: 10),
                 image: NetworkImage(data["photoURL"]),
                 fit: BoxFit.contain,
-                height: 90,
+                height: 70,
               ),
             ),
             Column(
@@ -60,17 +47,17 @@ class ListShops extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w900,
                     fontSize: 18.0,
                   ),
                 ),
                 Text(
-                  address,
+                  data["address"],
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w400,
                     fontSize: 12.0,
                   ),
                 ),
@@ -79,7 +66,7 @@ class ListShops extends StatelessWidget {
             IconButton(
                 icon: Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.blue[600],
+                  color: Colors.white,
                 ),
                 onPressed: () {
                   Navigator.pushNamed(context, "products", arguments: {

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
-import '../../bloc/bloc_user.dart';
-import '../../model/usuario.dart';
-import '../screens/sign_in_screen.dart';
+import '../../../bloc/bloc_user.dart';
+import '../../../model/usuario.dart';
 import 'button_bar.dart';
 import 'user_info.dart';
-import 'button_bar.dart';
 
 class ProfileHeader extends StatelessWidget {
   UserBloc _userBloc;
@@ -17,6 +15,8 @@ class ProfileHeader extends StatelessWidget {
     return StreamBuilder(
       stream: _userBloc.streamFirebase,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
+        print("Info account screen");
+        print(snapshot.data);
         switch (snapshot.connectionState) {
           case ConnectionState.none:
           case ConnectionState.waiting:

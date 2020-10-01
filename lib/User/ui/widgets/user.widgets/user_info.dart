@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../model/usuario.dart';
+import '../../../model/usuario.dart';
 
 class UserInfo extends StatelessWidget {
   Usuario _usuario;

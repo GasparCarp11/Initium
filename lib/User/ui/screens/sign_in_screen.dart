@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:initium/User/bloc/bloc_user.dart';
 import 'package:initium/User/model/usuario.dart';
-import 'package:initium/User/ui/widgets/button.dart';
+import 'package:initium/User/ui/widgets/tools.widgets/button.dart';
 import 'package:initium/gradient_back.dart';
 import 'account_user_screen.dart';
 
@@ -28,6 +28,7 @@ class _SignInScreenState extends State<SignInScreen> {
     return StreamBuilder(
         stream: userBloc.authStatus,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
+          print("Info Sign In Screen");
           print(snapshot.data);
           print(snapshot.connectionState);
           if (snapshot.hasError || snapshot.data == null) {
