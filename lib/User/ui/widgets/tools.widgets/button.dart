@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class Button extends StatefulWidget {
   final VoidCallback onPressed;
   final String text;
-  final String photoURL;
+  final String assetphoto;
   double width = 0.0;
   double heigth = 0.0;
 
   Button(
       {Key key,
-      @required this.photoURL,
+      @required this.assetphoto,
       @required this.text,
       @required this.onPressed,
       this.heigth,
@@ -42,7 +42,7 @@ class _ButtonState extends State<Button> {
               Image(
                   height: 30.0,
                   width: 40.0,
-                  image: AssetImage(widget.photoURL)),
+                  image: AssetImage(widget.assetphoto)),
               Container(
                 margin: EdgeInsets.only(left: 10.0),
                 child: Text(

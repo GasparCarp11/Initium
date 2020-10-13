@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:initium/User/bloc/bloc_user.dart';
 import 'package:initium/User/model/usuario.dart';
-import 'package:initium/User/ui/widgets/list.widgets/list_shops.dart';
+import 'package:initium/User/ui/screens/products_screen.dart';
 import 'package:initium/User/ui/widgets/tools.widgets/navigation_bar.dart';
 
 class InitiumScreen extends StatefulWidget {
@@ -40,7 +40,7 @@ class _InitiumScreenState extends State<InitiumScreen> {
                 );
               } else if (snapshot.data == null) {
                 return Center(
-                    child: Text("Erro al obtener información de los locaes"));
+                    child: Text("Error al obtener información de los locaes"));
               } else if (snapshot.hasData) {
                 List<DocumentSnapshot> data = snapshot.data.docs;
                 return ListView.builder(
@@ -48,11 +48,41 @@ class _InitiumScreenState extends State<InitiumScreen> {
                     itemBuilder: (BuildContext context, index) {
                       Map<String, dynamic> shops = data[index].data();
                       print("Info Initium");
-                      print(data);
-                      return Center(
-                        child: ListShops(
-                          data: shops,
+                      print(shops);
+                      return ListTile(
+                        leading: CircleAvatar(
+                          minRadius: 15.0,
+                          maxRadius: 20.0,
+                          backgroundImage: NetworkImage(shops["photoURL"]),
                         ),
+                        title: Text(
+                          shops["name"],
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        subtitle: Text(
+                          shops["address"],
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12.0,
+                          ),
+                        ),
+                        trailing: Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white,
+                        ),
+                        isThreeLine: true,
+                        dense: false,
+                        contentPadding: EdgeInsets.all(8.0),
+                        onTap: () {
+                          Navigator.pushNamed(context, "products",
+                              arguments: shops);
+                        },
                       );
                     });
               }

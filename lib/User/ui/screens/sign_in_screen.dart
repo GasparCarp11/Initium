@@ -76,7 +76,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
               ),
               Button(
-                photoURL: "assets/google.png",
+                assetphoto: "assets/google.png",
                 text: "Inicia con Google",
                 onPressed: () {
                   userBloc.signOut();

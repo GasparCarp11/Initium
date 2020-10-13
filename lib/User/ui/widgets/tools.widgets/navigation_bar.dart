@@ -10,6 +10,7 @@ class NavigationBar extends StatefulWidget {
 class _NavigationBarState extends State<NavigationBar> {
   int _currentIndex;
   final List<String> _list = ["my_orders", "initium", "user_account"];
+  final List<String> _list2 = ["initium", "user_account"];
 
   @override
   Widget build(BuildContext context) {
@@ -61,12 +62,42 @@ class _NavigationBarState extends State<NavigationBar> {
         },
       );
     } else if (widget.products == true) {
-      return BottomNavigationBar(items: [
-        BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart), title: Text("data")),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.access_alarm), title: Text("data"))
-      ]);
+      return BottomNavigationBar(
+        backgroundColor: Colors.blueGrey[900],
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+            title: Text(
+              "Comercios",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "Montserrat",
+                  fontWeight: FontWeight.w400),
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person,
+              color: Colors.white,
+            ),
+            title: Text("Mi cuenta",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: "Montserrat",
+                    fontWeight: FontWeight.w400)),
+          )
+        ],
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+            Navigator.pushNamed(context, _list2[_currentIndex]);
+          });
+        },
+      );
+      ;
     }
   }
 }
