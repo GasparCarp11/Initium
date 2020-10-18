@@ -3,9 +3,16 @@ import 'package:flutter/material.dart';
 class OrderButton extends StatefulWidget {
   final VoidCallback onPressed;
   final List lproducts;
+  final String text;
+  final IconData icon;
 
-  const OrderButton(
-      {Key key, @required this.onPressed, @required this.lproducts});
+  const OrderButton({
+    Key key,
+    @required this.onPressed,
+    @required this.lproducts,
+    @required this.text,
+    this.icon,
+  });
 
   @override
   State<StatefulWidget> createState() => _OrderButtonState();
@@ -29,13 +36,19 @@ class _OrderButtonState extends State<OrderButton> {
                   tileMode: TileMode.clamp)),
           child: Container(
             alignment: Alignment.center,
-            child: Text(
-              "FINALIZAR PEDIDO",
-              style: TextStyle(
-                  fontSize: 20.0,
-                  fontFamily: "Montserrat",
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  widget.text,
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontFamily: "Montserrat",
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600),
+                ),
+                Icon(widget.icon),
+              ],
             ),
           ),
         ),
@@ -56,7 +69,7 @@ class _OrderButtonState extends State<OrderButton> {
           child: Container(
             alignment: Alignment.center,
             child: Text(
-              "FINALIZAR PEDIDO",
+              widget.text,
               style: TextStyle(
                   fontSize: 20.0,
                   fontFamily: "Montserrat",

@@ -5,7 +5,7 @@ class Order {
   final String uidshop;
   final String buyer;
   final List products;
-  final int ammount;
+  final int total;
 
   Order({
     Key key,
@@ -13,6 +13,6 @@ class Order {
     @required this.uidorder,
     this.buyer,
     this.products,
-    this.ammount,
+    this.total,
   });
 }

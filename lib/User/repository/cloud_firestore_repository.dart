@@ -9,6 +9,6 @@ class CloudFirestoreRepository {
   void updateUserDataFirestore(Usuario user) =>
       _cloudFirestoreAPI.updateUserData(user);
 
-  void updateOrderInfo(Order order, Usuario user) =>
-      _cloudFirestoreAPI.addOrder(order, user);
+  Future<void> updateOrderData(Order order) =>
+      _cloudFirestoreAPI.updateOrderData(order);
 }

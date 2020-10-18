@@ -13,13 +13,9 @@ class UserBloc implements Bloc {
 
   Stream<User> get authStatus => streamFirebase;
 
-  Future<UserCredential> signIn() {
-    return auth_repository.signInFirebase();
-  }
+  Future<UserCredential> signIn() => auth_repository.signInFirebase();
 
-  signOut() {
-    return auth_repository.signOut();
-  }
+  signOut() => auth_repository.signOut();
 
   final _cloudFirestoreRepository = CloudFirestoreRepository();
 
@@ -28,6 +24,9 @@ class UserBloc implements Bloc {
 
   Stream<QuerySnapshot> get listshops => collectionReference.snapshots();
 
+  Future<void> updateOrderData(Order order) =>
+      _cloudFirestoreRepository.updateOrderData(order);
+
   Stream<QuerySnapshot> showProducts(String shopUID) {
     CollectionReference collectionReference = FirebaseFirestore.instance
         .collection("shops")
@@ -35,9 +34,6 @@ class UserBloc implements Bloc {
         .collection("products");
     return collectionReference.snapshots();
   }
-
-  void updateOrder(Order order, Usuario usuario) =>
-      _cloudFirestoreRepository.updateOrderInfo(order, usuario);
 
   void updateUserData(Usuario usuario) =>
       _cloudFirestoreRepository.updateUserDataFirestore(usuario);
