@@ -16,10 +16,10 @@ class LastScreenOrder extends StatelessWidget {
                     fontSize: 20,
                     fontFamily: "Montserrat",
                     fontWeight: FontWeight.w700,
-                    color: Colors.blueAccent[700])),
+                    color: Colors.white)),
             Image(
               image: AssetImage("assets/tick1.png"),
-              color: Colors.blueAccent[700],
+              color: Colors.blue[600],
               width: MediaQuery.of(context).size.width - 50,
               height: 150,
             ),
@@ -34,14 +34,13 @@ class LastScreenOrder extends StatelessWidget {
                 height: 50,
                 width: MediaQuery.of(context).size.width - 100,
                 decoration: BoxDecoration(
-                  color: Colors.blueAccent[700],
+                  gradient: LinearGradient(
+                      colors: [Colors.blue[900], Colors.blue[400]],
+                      begin: FractionalOffset(0.2, 0.0),
+                      end: FractionalOffset(1.0, 0.6),
+                      stops: [0.0, 0.6],
+                      tileMode: TileMode.clamp),
                   borderRadius: BorderRadius.circular(20.0),
-                  /*gradient: LinearGradient(
-                        colors: [Colors.blue[900], Colors.blue[400]],
-                        begin: FractionalOffset(0.2, 0.0),
-                        end: FractionalOffset(1.0, 0.6),
-                        stops: [0.0, 0.6],
-                        tileMode: TileMode.clamp)*/
                 ),
                 child: Container(
                   alignment: Alignment.center,
@@ -53,10 +52,10 @@ class LastScreenOrder extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 20.0,
                             fontFamily: "Montserrat",
-                            color: Colors.black,
+                            color: Colors.white,
                             fontWeight: FontWeight.w600),
                       ),
-                      Icon(Icons.description),
+                      Icon(Icons.arrow_forward, color: Colors.white),
                     ],
                   ),
                 ),

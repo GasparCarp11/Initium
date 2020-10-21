@@ -79,13 +79,19 @@ class _ProductsScreenState extends State<ProductsScreen> {
           fontSize: 14.0,
         ),
       ),
-      trailing: Icon(
-        Icons.add,
-        color: Colors.blueAccent[400],
+      trailing: Container(
+        padding: EdgeInsets.all(5),
+        decoration: BoxDecoration(
+            color: Colors.blueGrey[800],
+            borderRadius: BorderRadius.circular(25.0)),
+        child: Icon(
+          Icons.add,
+          color: Colors.blueAccent[400],
+        ),
       ),
       isThreeLine: true,
       dense: false,
-      contentPadding: EdgeInsets.all(8.0),
+      contentPadding: EdgeInsets.only(left: 5, right: 12, top: 8),
       onTap: () {
         lProducts.add(products["name"]);
         pProducts.add(products["prize"]);
@@ -130,11 +136,10 @@ class _ProductsScreenState extends State<ProductsScreen> {
               children: <Widget>[
                 Text(
                   lproducts.length.toString(),
-                  style: TextStyle(color: Colors.blueAccent[400]),
+                  style: TextStyle(color: Colors.white),
                 ),
                 IconButton(
-                    icon: Icon(Icons.shopping_cart,
-                        color: Colors.blueAccent[400]),
+                    icon: Icon(Icons.shopping_cart, color: Colors.white),
                     onPressed: () => showProducts(lproducts, context))
               ],
             ),
@@ -142,11 +147,11 @@ class _ProductsScreenState extends State<ProductsScreen> {
         ],
         title: Text(
           title,
-          style: TextStyle(fontSize: 20.0, color: Colors.blueAccent[400]),
+          style: TextStyle(fontSize: 20.0, color: Colors.white),
         ),
         centerTitle: true,
         leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.blueAccent[400]),
+            icon: Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () {
               Navigator.pop(context);
             }));

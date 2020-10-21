@@ -15,8 +15,6 @@ class ProfileHeader extends StatelessWidget {
     return StreamBuilder(
       stream: _userBloc.streamFirebase,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        print("Info account screen");
-        print(snapshot.data);
         switch (snapshot.connectionState) {
           case ConnectionState.none:
           case ConnectionState.waiting:
@@ -31,7 +29,6 @@ class ProfileHeader extends StatelessWidget {
 
   Widget showProfileData(AsyncSnapshot snapshot) {
     if (snapshot.data == null || snapshot.hasError) {
-      print("No logueado");
       return Container(
           margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 50.0),
           child: Column(children: <Widget>[
@@ -55,8 +52,6 @@ class ProfileHeader extends StatelessWidget {
             )
           ]));
     } else {
-      print("Logueado");
-      print(snapshot.data);
       _usuario = Usuario(
           uid: snapshot.data.uid,
           name: snapshot.data.displayName,

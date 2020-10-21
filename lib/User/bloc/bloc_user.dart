@@ -35,6 +35,14 @@ class UserBloc implements Bloc {
     return collectionReference.snapshots();
   }
 
+  Future<DocumentSnapshot> showShop(String shopUID) {
+    Future<DocumentSnapshot> collectionReference =
+        FirebaseFirestore.instance.collection("shops").doc(shopUID).get();
+    return collectionReference;
+  }
+
+  Stream<QuerySnapshot> showOrders() => _cloudFirestoreRepository.showOrders();
+
   void updateUserData(Usuario usuario) =>
       _cloudFirestoreRepository.updateUserDataFirestore(usuario);
 

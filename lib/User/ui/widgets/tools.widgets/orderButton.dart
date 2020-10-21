@@ -44,10 +44,13 @@ class _OrderButtonState extends State<OrderButton> {
                   style: TextStyle(
                       fontSize: 20.0,
                       fontFamily: "Montserrat",
-                      color: Colors.black,
+                      color: Colors.white,
                       fontWeight: FontWeight.w600),
                 ),
-                Icon(widget.icon),
+                Icon(
+                  widget.icon,
+                  color: Colors.white,
+                ),
               ],
             ),
           ),

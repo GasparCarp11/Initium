@@ -28,20 +28,19 @@ class _FinishOrderScreenState extends State<FinishOrderScreen> {
     pproducts.forEach((element) {
       total = element + total;
     });
-    print(total);
+
     return Scaffold(
       backgroundColor: Colors.blueGrey[900],
       appBar: appBarFinishOrder(widget.uiOrder, infoshop["name"], total),
       bottomNavigationBar: OrderButton(
         onPressed: () {
-          userBloc
-              .updateOrderData(Order(
-                uidshop: infoshop["uid"],
-                uidorder: widget.uiOrder.toString(),
-                products: products,
-                total: total,
-              ))
-              .whenComplete(() => print("PEDIDO REALIZADO"));
+          userBloc.updateOrderData(Order(
+            uidshop: infoshop["uid"],
+            uidorder: widget.uiOrder.toString(),
+            products: products,
+            total: total,
+            isReady: false,
+          ));
           Navigator.pushNamed(context, "last");
         },
         lproducts: products,
@@ -62,7 +61,7 @@ class _FinishOrderScreenState extends State<FinishOrderScreen> {
           IconButton(
               icon: Icon(
                 Icons.info_outline,
-                color: Colors.blueAccent[400],
+                color: Colors.white,
               ),
               onPressed: () {
                 showTotal(context, uiOrder, nameShop, total);
@@ -70,11 +69,11 @@ class _FinishOrderScreenState extends State<FinishOrderScreen> {
         ],
         title: Text(
           "PEDIDO #${uiOrder.toString()}",
-          style: TextStyle(fontSize: 20.0, color: Colors.blueAccent[400]),
+          style: TextStyle(fontSize: 20.0, color: Colors.white),
         ),
         centerTitle: true,
         leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.blueAccent[400]),
+            icon: Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () {
               Navigator.pop(context);
             }));
@@ -103,6 +102,7 @@ class _FinishOrderScreenState extends State<FinishOrderScreen> {
                   padding: EdgeInsets.only(left: 8.0),
                   child: Text(products[index],
                       style: TextStyle(
+                          color: Colors.white,
                           fontSize: 18,
                           fontFamily: "Montserrat",
                           fontWeight: FontWeight.w500)),
@@ -115,6 +115,7 @@ class _FinishOrderScreenState extends State<FinishOrderScreen> {
             ),
             trailing: Text("\$${pproducts[index].toString()}",
                 style: TextStyle(
+                    color: Colors.white,
                     fontSize: 14,
                     fontFamily: "Montserrat",
                     fontWeight: FontWeight.w500)),
@@ -144,7 +145,7 @@ showTotal(BuildContext context, int uiOrder, String nameShop, int total) {
                       fontWeight: FontWeight.w400),
                 ),
                 Text(
-                  "COMERCIO: $nameShop",
+                  "COMERCIO:$nameShop",
                   textAlign: TextAlign.justify,
                   style: TextStyle(
                       fontSize: 20,

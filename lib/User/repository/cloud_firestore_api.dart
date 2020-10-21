@@ -33,6 +33,19 @@ class CloudFirestoreAPI {
       "uidshop": order.uidshop,
       "products": order.products,
       "ammount": order.total,
+      "isReady": order.isReady,
+      "date": DateTime.now(),
     });
+  }
+
+  Stream<QuerySnapshot> showOrders() {
+    User user = _auth.currentUser;
+
+    Stream<QuerySnapshot> refOrders = _db
+        .collection(ORDERS)
+        .where("buyer", isEqualTo: "$USERS/${user.uid}")
+        .snapshots();
+
+    return refOrders;
   }
 }

@@ -11,4 +11,6 @@ class CloudFirestoreRepository {
 
   Future<void> updateOrderData(Order order) =>
       _cloudFirestoreAPI.updateOrderData(order);
+
+  Stream<QuerySnapshot> showOrders() => _cloudFirestoreAPI.showOrders();
 }
