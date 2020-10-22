@@ -248,6 +248,7 @@ class _BluetoothAppState extends State<BluetoothApp> {
                         const EdgeInsets.only(top: 30.0, left: 8, right: 8),
                     child: InkWell(
                       onTap: () {
+                        print(idOrder);
                         _sendOnInfoOrderToBluetooth(idOrder);
                       },
                       child: Container(
@@ -431,10 +432,9 @@ class _BluetoothAppState extends State<BluetoothApp> {
   }
 
   void _sendOnInfoOrderToBluetooth(String id) async {
-    connection.output.add(ascii.encode(id));
+    connection.output.add(utf8.encode("${id.toString()}"));
     await connection.output.allSent;
     show('Aguarde que se abra el cajon');
-    print(id);
     setState(() {
       _deviceState = 1;
     });
