@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:initium/User/ui/screens/bluetooth_connection.dart';
+
 import 'package:initium/User/ui/screens/finish_order.dart';
 import 'package:initium/User/ui/screens/initium_screen.dart';
 import 'package:initium/User/ui/screens/last_screen_order.dart';
@@ -17,5 +19,6 @@ Map<String, WidgetBuilder> getNamedRoutes() {
     'my_orders': (BuildContext context) => MyOrdersScreen(),
     'finish_order': (BuildContext context) => FinishOrderScreen(),
     'last': (BuildContext context) => LastScreenOrder(),
+    'blue': (BuildContext context) => BluetoothApp(),
   };
 }

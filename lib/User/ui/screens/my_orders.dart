@@ -13,6 +13,7 @@ class MyOrdersScreen extends StatefulWidget {
 
 class _MyOrdersScreenState extends State<MyOrdersScreen> {
   UserBloc _userBloc;
+  String idOrder;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +43,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                     child: Text("Error al obtener información de tus pedidos"));
               } else if (snapshot.hasData) {
                 List<DocumentSnapshot> data = snapshot.data.docs;
+
                 return ListView.builder(
                     itemCount: data.length,
                     itemBuilder: (BuildContext context, index) {
@@ -69,7 +71,11 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
             return InkWell(
               highlightColor: Colors.blueAccent[700],
               splashColor: Colors.blueAccent[700],
-              onTap: () {},
+              onTap: () {
+                showOrderID(orders["uidorder"]);
+                print(idOrder);
+                Navigator.pushNamed(context, "blue", arguments: idOrder);
+              },
               child: Container(
                 margin: EdgeInsets.all(10.0),
                 padding: EdgeInsets.only(left: 8.0, right: 8.0),
@@ -251,5 +257,15 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
       leading: SizedBox(),
       centerTitle: true,
     );
+  }
+
+  Future showOrderID(String uidorder) async {
+    var doc_ref = await FirebaseFirestore.instance
+        .collection("orders")
+        .where("uidorder", isEqualTo: uidorder)
+        .get();
+    doc_ref.docs.forEach((element) {
+      idOrder = element.id;
+    });
   }
 }
