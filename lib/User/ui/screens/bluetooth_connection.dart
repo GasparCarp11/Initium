@@ -10,23 +10,20 @@ class BluetoothApp extends StatefulWidget {
 }
 
 class _BluetoothAppState extends State<BluetoothApp> {
-  // Initializing the Bluetooth connection state to be unknown
   BluetoothState _bluetoothState = BluetoothState.UNKNOWN;
-  // Initializing a global key, as it would help us in showing a SnackBar later
+
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  // Get the instance of the Bluetooth
+
   FlutterBluetoothSerial _bluetooth = FlutterBluetoothSerial.instance;
-  // Track the Bluetooth connection with the remote device
+
   BluetoothConnection connection;
 
   int _deviceState;
 
   bool isDisconnecting = false;
 
-  // To track whether the device is still connected to Bluetooth
   bool get isConnected => connection != null && connection.isConnected;
 
-  // Define some variables, which will be required later
   List<BluetoothDevice> _devicesList = [];
   BluetoothDevice _device;
   bool _connected = false;
@@ -36,7 +33,6 @@ class _BluetoothAppState extends State<BluetoothApp> {
   void initState() {
     super.initState();
 
-    // Get current state
     FlutterBluetoothSerial.instance.state.then((state) {
       setState(() {
         _bluetoothState = state;
@@ -83,8 +79,6 @@ class _BluetoothAppState extends State<BluetoothApp> {
     return false;
   }
 
-  // For retrieving and storing the paired devices
-  // in a list.
   Future<void> getPairedDevices() async {
     List<BluetoothDevice> devices = [];
     try {
@@ -102,7 +96,6 @@ class _BluetoothAppState extends State<BluetoothApp> {
     });
   }
 
-  // Now, its time to build the UI
   @override
   Widget build(BuildContext context) {
     String idOrder = ModalRoute.of(context).settings.arguments;
@@ -432,7 +425,7 @@ class _BluetoothAppState extends State<BluetoothApp> {
   }
 
   void _sendOnInfoOrderToBluetooth(String id) async {
-    connection.output.add(utf8.encode("${id.toString()}"));
+    connection.output.add(utf8.encode(":R${id.toString()}!"));
     await connection.output.allSent;
     show('Aguarde que se abra el cajon');
     setState(() {

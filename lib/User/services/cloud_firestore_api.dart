@@ -27,7 +27,7 @@ class CloudFirestoreAPI {
     CollectionReference refOrders = _db.collection(ORDERS);
     User user = _auth.currentUser;
 
-    await refOrders.add({
+    await refOrders.doc(order.uidorder).set({
       "uidorder": order.uidorder,
       "buyer": "$USERS/${user.uid}",
       "uidshop": order.uidshop,

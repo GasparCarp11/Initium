@@ -72,9 +72,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
               highlightColor: Colors.blueAccent[700],
               splashColor: Colors.blueAccent[700],
               onTap: () {
-                showOrderID(orders["uidorder"]);
-                print(idOrder);
-                Navigator.pushNamed(context, "blue", arguments: idOrder);
+                Navigator.pushNamed(context, "blue",
+                    arguments: orders["uidorder"]);
               },
               child: Container(
                 margin: EdgeInsets.all(10.0),
