@@ -63,7 +63,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
         width: 80,
       ),
       title: Text(
-        products["name"],
+        products["available"] ? products["name"] : "NO DISPONIBLE",
         textAlign: TextAlign.center,
         style: TextStyle(
           color: Colors.white,
@@ -72,7 +72,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
         ),
       ),
       subtitle: Text(
-        "\$${products["prize"].toString()}",
+        products["available"] ? "\$${products["prize"].toString()}" : "",
         textAlign: TextAlign.center,
         style: TextStyle(
           color: Colors.white,
@@ -85,7 +85,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
             color: Colors.blueGrey[800],
             borderRadius: BorderRadius.circular(25.0)),
         child: Icon(
-          Icons.add,
+          products["available"] ? Icons.add : Icons.do_not_disturb_alt,
           color: Colors.blueAccent[400],
         ),
       ),
@@ -93,9 +93,11 @@ class _ProductsScreenState extends State<ProductsScreen> {
       dense: false,
       contentPadding: EdgeInsets.only(left: 5, right: 12, top: 8),
       onTap: () {
-        lProducts.add(products["name"]);
-        pProducts.add(products["prize"]);
-        setState(() {});
+        if (products["available"]) {
+          lProducts.add(products["name"]);
+          pProducts.add(products["prize"]);
+          setState(() {});
+        }
       },
     );
   }
