@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -241,7 +242,6 @@ class _BluetoothAppState extends State<BluetoothApp> {
                         const EdgeInsets.only(top: 30.0, left: 8, right: 8),
                     child: InkWell(
                       onTap: () {
-                        print(idOrder);
                         _sendOnInfoOrderToBluetooth(idOrder);
                       },
                       child: Container(
@@ -335,6 +335,7 @@ class _BluetoothAppState extends State<BluetoothApp> {
       ));
     } else {
       _devicesList.forEach((device) {
+        if (device.name == "Initium") {}
         items.add(DropdownMenuItem(
           child: Text(device.name),
           value: device,
@@ -349,35 +350,40 @@ class _BluetoothAppState extends State<BluetoothApp> {
       _isButtonUnavailable = true;
     });
     if (_device == null) {
-      show('No está seleccionado el totem');
+      show('No selecciono ningún dispositivo');
+      setState(() {
+        _connected = false;
+      });
+      setState(() => _isButtonUnavailable = false);
     } else {
-      if (!isConnected) {
-        await BluetoothConnection.toAddress(_device.address)
-            .then((_connection) {
-          print('Conectado con la central');
-          connection = _connection;
-          setState(() {
-            _connected = true;
-          });
-
-          connection.input.listen(null).onDone(() {
-            if (isDisconnecting) {
-              print('Desconectado local');
-            } else {
-              print('Desconectado de forma remota');
-            }
-            if (this.mounted) {
-              setState(() {});
-            }
-          });
-        }).catchError((error) {
-          print('No se puedo conectar, ocurrió el siguiente error:');
-          print(error);
+      try {
+        BluetoothConnection _connection =
+            await BluetoothConnection.toAddress(_device.address);
+        connection = _connection;
+        setState(() {
+          _connected = true;
         });
         show('Conectado con éxito');
 
-        setState(() => _isButtonUnavailable = false);
+        connection.input.listen(null).onDone(() {
+          if (isDisconnecting) {
+            print('Desconectado de forma local');
+          } else {
+            print('Desconectado de forma remota');
+          }
+          if (this.mounted) {
+            setState(() {});
+          }
+        });
+      } catch (exception) {
+        print('No se ha podido conectar por el siguiente error:');
+        print(exception);
+        show('No fue posible la conexión, reintente');
+        setState(() {
+          _connected = false;
+        });
       }
+      setState(() => _isButtonUnavailable = false);
     }
   }
 

@@ -16,7 +16,7 @@ class ButtonsBar extends StatelessWidget {
             CircleButton(() {}, true, Icons.help, 20.0, Colors.white12),
             CircleButton(() {
               Navigator.pushNamed(context, "initium");
-            }, true, Icons.all_inclusive, 20.0, Colors.white12),
+            }, false, Icons.all_inclusive, 25.0, Colors.white12),
             CircleButton(() {
               userBloc.signOut();
               Navigator.pushNamed(context, "/");
