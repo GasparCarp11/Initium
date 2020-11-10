@@ -23,6 +23,7 @@ dependencies:
   linear_gradient: ^0.1.12
   firebase_core: ^0.5.0
   flutter_bluetooth_serial: ^0.2.2
+  video_player: ^0.10.1
 
 
 dev_dependencies:

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:initium/User/bloc/bloc_user.dart';
 import 'package:initium/User/model/usuario.dart';
-import 'package:initium/User/ui/screens/products_screen.dart';
 import 'package:initium/User/ui/widgets/tools.widgets/navigation_bar.dart';
 
 class InitiumScreen extends StatefulWidget {

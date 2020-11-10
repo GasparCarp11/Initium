@@ -13,7 +13,9 @@ class ButtonsBar extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
         child: Row(
           children: <Widget>[
-            CircleButton(() {}, true, Icons.help, 20.0, Colors.white12),
+            CircleButton(() {
+              Navigator.pushNamed(context, "how_use");
+            }, true, Icons.help, 20.0, Colors.white12),
             CircleButton(() {
               Navigator.pushNamed(context, "initium");
             }, false, Icons.all_inclusive, 25.0, Colors.white12),
